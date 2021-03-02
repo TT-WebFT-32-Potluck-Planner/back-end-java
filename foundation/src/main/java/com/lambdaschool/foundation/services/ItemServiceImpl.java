@@ -60,4 +60,21 @@ public class ItemServiceImpl implements ItemService{
 
     return itemRepository.save(newItem);
   }
+
+  @Override
+  public List<Item> findItemsByPotluckId(Long potluckid) {
+    List<Item> potluckItems = new ArrayList<>();
+        itemRepository.findItemsByPotluck(potluckService.findPotluckById(potluckid))
+            .iterator()
+            .forEachRemaining(potluckItems::add);
+    return potluckItems;
+  }
+
+  @Transactional
+  @Override
+  public void delete(long id) {
+    itemRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Item id " + id + " not found!"));
+    itemRepository.deleteById(id);
+  }
 }

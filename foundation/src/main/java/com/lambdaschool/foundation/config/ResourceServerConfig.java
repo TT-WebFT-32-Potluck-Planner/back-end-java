@@ -71,7 +71,9 @@ public class ResourceServerConfig
                 "/oauth/revoke-token",
                 "/logout",
                 "/api/auth/**",
-                "/api/users/**")
+                "/api/users/**",
+                "/api/items",
+                "/api/users/{id}/potlucks/{potluckid}/items")
             .authenticated()
             .antMatchers(HttpMethod.POST,
                 "/potlucks")

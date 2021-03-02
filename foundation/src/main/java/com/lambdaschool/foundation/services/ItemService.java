@@ -11,4 +11,8 @@ public interface ItemService {
   Item findItemById(long id);
 
   Item save(Item item, long userid, long potluckid);
+
+  List<Item> findItemsByPotluckId(Long potluckid);
+
+  void delete(long itemid);
 }

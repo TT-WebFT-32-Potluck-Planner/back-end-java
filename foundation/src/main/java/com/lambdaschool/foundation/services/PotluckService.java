@@ -10,6 +10,7 @@ public interface PotluckService {
   List<Potluck> findPotlucksByUser(long id);
 
   Potluck save(Potluck potluck, long userid);
+  Potluck update(Potluck potluck, long potluckid);
 
   Potluck findPotluckById(long id);
 

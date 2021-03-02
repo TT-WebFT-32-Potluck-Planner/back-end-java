@@ -63,10 +63,10 @@ public class User
         orphanRemoval = true)
     @JsonIgnoreProperties(value = "user",
         allowSetters = true)
-    private List<Attendee> attendees = new ArrayList<>();
+    private Set<Attendee> attendees = new HashSet<>();
 
     /**
-     * A list of potlucks associated with this user
+     * A list of potlucks this user is hosting
      */
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
@@ -226,7 +226,7 @@ public class User
      *
      * @return A list of user attendee objects associated with this user
      */
-    public List<Attendee> getAttendees() {
+    public Set<Attendee> getAttendees() {
         return attendees;
     }
 
@@ -235,7 +235,7 @@ public class User
      *
      * @param attendees Change the list of user attendee objects associated with this user to this one
      */
-    public void setAttendees(List<Attendee> attendees) {
+    public void setAttendees(Set<Attendee> attendees) {
         this.attendees = attendees;
     }
 
