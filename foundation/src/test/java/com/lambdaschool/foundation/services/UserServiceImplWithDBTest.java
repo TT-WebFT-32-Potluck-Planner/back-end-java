@@ -117,8 +117,7 @@ public class UserServiceImplWithDBTest
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
-            "ILuvMath!",
-            "tiger@school.lambda");
+            "ILuvMath!");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -145,8 +144,7 @@ public class UserServiceImplWithDBTest
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
-            "ILuvMath!",
-            "tiger@school.lambda");
+            "ILuvMath!");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -174,8 +172,7 @@ public class UserServiceImplWithDBTest
         r2.setRoleid(2);
 
         User u2 = new User("mojo",
-            "ILuvMath!",
-            "mojo@school.lambda");
+            "ILuvMath!");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -206,8 +203,7 @@ public class UserServiceImplWithDBTest
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
-            "password",
-            "cinnamon@school.lambda");
+            "password");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -244,8 +240,7 @@ public class UserServiceImplWithDBTest
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
-            "password",
-            "cinnamon@school.lambda");
+            "password");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));

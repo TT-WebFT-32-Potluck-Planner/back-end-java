@@ -43,14 +43,6 @@ public class User
     private String password;
 
     /**
-     * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
-     */
-    @Column(nullable = false,
-        unique = true)
-    @Email
-    private String primaryemail;
-
-    /**
      * A list of emails for this user
      */
     @OneToMany(mappedBy = "user",
@@ -72,6 +64,38 @@ public class User
     private Set<UserRoles> roles = new HashSet<>();
 
     /**
+     * A list of attendees associated with this user
+     * Part of the join relationship between user and potluck
+     * connects users to the potlucks they are attending
+     */
+    @OneToMany(mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+        allowSetters = true)
+    private List<Attendee> attendees = new ArrayList<>();
+
+    /**
+     * A list of potlucks associated with this user
+     */
+    @OneToMany(mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user",
+        allowSetters = true)
+    private List<Potluck> potlucks = new ArrayList<>();
+
+    /**
+     * A list of potluckitems associated with this user
+     */
+    @OneToMany(mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = false)
+    @JsonIgnoreProperties(value = "user",
+        allowSetters = true)
+    private List<PotLuckItem> potluckitems = new ArrayList<>();
+
+    /**
      * Default constructor used primarily by the JPA.
      */
     public User()
@@ -85,16 +109,14 @@ public class User
      *
      * @param username     The username (String) of the user
      * @param password     The password (String) of the user
-     * @param primaryemail The primary email (String) of the user
      */
     public User(
         String username,
-        String password,
-        String primaryemail)
+        String password
+    )
     {
         setUsername(username);
         setPassword(password);
-        this.primaryemail = primaryemail;
     }
 
     /**
@@ -137,25 +159,6 @@ public class User
         this.username = username.toLowerCase();
     }
 
-    /**
-     * getter for primary email
-     *
-     * @return the primary email (String) for the user converted to lowercase
-     */
-    public String getPrimaryemail()
-    {
-        return primaryemail;
-    }
-
-    /**
-     * setter for primary email
-     *
-     * @param primaryemail the new primary email (String) for the user converted to lowercase
-     */
-    public void setPrimaryemail(String primaryemail)
-    {
-        this.primaryemail = primaryemail.toLowerCase();
-    }
 
     /**
      * Getter for the password
@@ -246,5 +249,41 @@ public class User
         }
 
         return rtnList;
+    }
+
+    /**
+     * Getter for user's attendee objects
+     *
+     * @return A list of user attendee objects associated with this user
+     */
+    public List<Attendee> getAttendees() {
+        return attendees;
+    }
+
+    /**
+     * Setter for user's attendee objects
+     *
+     * @param attendees Change the list of user attendee objects associated with this user to this one
+     */
+    public void setAttendees(List<Attendee> attendees) {
+        this.attendees = attendees;
+    }
+
+    /**
+     * Getter for user's potlucks
+     *
+     * @return A list of user potlucks associated with this user
+     */
+    public List<Potluck> getPotlucks() {
+        return potlucks;
+    }
+
+    /**
+     * Setter for user's potlucks
+     *
+     * @param potlucks Change the list of user potlucks associated with this user to this one
+     */
+    public void setPotlucks(List<Potluck> potlucks) {
+        this.potlucks = potlucks;
     }
 }
