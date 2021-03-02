@@ -92,7 +92,7 @@ public class PotluckController {
         .toUri();
     responseHeaders.setLocation(newPotluckURI);
 
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return new ResponseEntity<>(newPotluck, HttpStatus.CREATED);
   }
 
   //PUT TO UPDATE POTLUCK AS ORGANIZER: /api/users/:id/potlucks/:potId
@@ -109,7 +109,7 @@ public class PotluckController {
     updatePotluck.setPotluckid(potluckid);
 
     if (user.getUserid() == potluckService.findPotluckById(potluckid).getUser().getUserid()) {
-      potluckService.save(updatePotluck, user.getUserid());
+      potluckService.update(updatePotluck, potluckid);
     } else {
       return new ResponseEntity<>("Potluck can only be updated by potluck creator.", HttpStatus.FORBIDDEN);
     }

@@ -3,7 +3,9 @@ package com.lambdaschool.foundation.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,7 +55,7 @@ public class Potluck extends Auditable {
   @OneToMany(mappedBy = "potluck",
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  @JsonIgnoreProperties(value = "potluck",
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
       allowSetters = true)
   private Set<Attendee> attendees = new HashSet<>();
 
@@ -67,7 +69,7 @@ public class Potluck extends Auditable {
   @ManyToOne
   @JoinColumn(name = "userid",
       nullable = false)
-  @JsonIgnoreProperties(value="potluck",
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
       allowSetters = true)
   private User user;
 
@@ -78,9 +80,9 @@ public class Potluck extends Auditable {
   @OneToMany(mappedBy = "potluck",
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  @JsonIgnoreProperties(value = "potluck",
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
       allowSetters = true)
-  private Set<Item> items = new HashSet<>();
+  private List<Item> items = new ArrayList<>();
 
   /**
    * Default constructor used primarily by the JPA.
@@ -161,11 +163,11 @@ public class Potluck extends Auditable {
     this.user = user;
   }
 
-  public Set<Item> getItems() {
+  public List<Item> getItems() {
     return items;
   }
 
-  public void setItems(Set<Item> items) {
+  public void setItems(ArrayList<Item> items) {
     this.items = items;
   }
 }

@@ -24,6 +24,9 @@ public class PotluckServiceImpl implements PotluckService{
   @Autowired
   private ItemService itemService;
 
+  @Autowired
+  private HelperFunctions helperFunctions;
+
   @Override
   public List<Potluck> findAll() {
     List<Potluck> allPotlucks = new ArrayList<>();
@@ -47,6 +50,39 @@ public class PotluckServiceImpl implements PotluckService{
 
     return potluck;
   }
+
+      @Transactional
+      @Override
+      public Potluck update(
+          Potluck potluck,
+          long potluckid)
+      {
+          Potluck currentPotluck = findPotluckById(potluckid);
+              currentPotluck.setPotluckname(potluck.getPotluckname());
+              currentPotluck.setDate(potluck.getDate());
+              currentPotluck.setTime(potluck.getTime());
+              currentPotluck.setLocation(potluck.getLocation());
+
+          for (Attendee attendee : potluck.getAttendees())
+          {
+            User addUser = userService.findUserById(attendee.getUser().getUserid());
+            currentPotluck.getAttendees()
+                .add(new Attendee(addUser, currentPotluck));
+          }
+
+          currentPotluck.getItems()
+              .clear();
+
+          for (Item item : potluck.getItems())
+          {
+            Item addItem = itemService.findItemById(item.getItemid());
+            currentPotluck.getItems()
+                .add(addItem);
+          }
+
+
+              return potluckRepository.save(currentPotluck);
+      }
 
   @Transactional
   @Override
@@ -102,6 +138,7 @@ public class PotluckServiceImpl implements PotluckService{
     return potluck;
   }
 
+  @Transactional
   @Override
   public void deletePotluckById(long id) {
     potluckRepository.findById(id)
