@@ -2,8 +2,8 @@ package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Item;
-import com.lambdaschool.foundation.models.PotLuckItem;
 import com.lambdaschool.foundation.models.Potluck;
+import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.repository.ItemRepository;
 import com.lambdaschool.foundation.repository.PotluckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,11 @@ public class ItemServiceImpl implements ItemService{
   private ItemRepository itemRepository;
 
   @Autowired
-  private PotluckRepository potluckRepository;
+  private PotluckService potluckService;
+
+  @Autowired
+  private UserService userService;
+
 
   @Override
   public List<Item> findAll() {
@@ -36,8 +40,9 @@ public class ItemServiceImpl implements ItemService{
         .orElseThrow(() -> new ResourceNotFoundException("Item id " + id + " not found!"));
   }
 
+  @Transactional
   @Override
-  public Item save(Item item) {
+  public Item save(Item item, long userid, long potluckid) {
     Item newItem = new Item();
 
     if (item.getItemid() != 0)
@@ -49,17 +54,9 @@ public class ItemServiceImpl implements ItemService{
 
     newItem.setItemname(item.getItemname());
 
-    newItem.getPotLuckitems()
-        .clear();
-    for (PotLuckItem pli : item.getPotLuckitems())
-    {
-      Potluck newPotluck = potluckRepository.findById(pli.getPotluck().getPotluckid())
-          .orElseThrow(() -> new ResourceNotFoundException("Potluck id " + pli.getPotluck()
-              .getPotluckid() + " not found!"));
+    newItem.setPotluck(potluckService.findPotluckById(potluckid));
 
-      newItem.getPotLuckitems()
-          .add(new PotLuckItem(newPotluck, newItem));
-    }
+    newItem.setUser(userService.findUserById(userid));
 
     return itemRepository.save(newItem);
   }

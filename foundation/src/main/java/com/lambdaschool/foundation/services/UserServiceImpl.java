@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.exceptions.ResourceFoundException;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.repository.UserRepository;
@@ -96,6 +97,10 @@ public class UserServiceImpl
             newUser.setUserid(user.getUserid());
         }
 
+        if (userrepos.findByUsername(user.getUsername()) != null) {
+            throw new ResourceFoundException("User " + user.getUsername() + "already exists.");
+        }
+
         newUser.setUsername(user.getUsername()
             .toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
@@ -111,14 +116,6 @@ public class UserServiceImpl
                     addRole));
         }
 
-        newUser.getUseremails()
-            .clear();
-        for (Useremail ue : user.getUseremails())
-        {
-            newUser.getUseremails()
-                .add(new Useremail(newUser,
-                    ue.getUseremail()));
-        }
 
         return userrepos.save(newUser);
     }
@@ -160,18 +157,6 @@ public class UserServiceImpl
                 }
             }
 
-            if (user.getUseremails()
-                .size() > 0)
-            {
-                currentUser.getUseremails()
-                    .clear();
-                for (Useremail ue : user.getUseremails())
-                {
-                    currentUser.getUseremails()
-                        .add(new Useremail(currentUser,
-                            ue.getUseremail()));
-                }
-            }
 
             return userrepos.save(currentUser);
         } else

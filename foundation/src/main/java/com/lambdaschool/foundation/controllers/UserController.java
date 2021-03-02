@@ -36,7 +36,6 @@ public class UserController
      * @return JSON list of all users with a status of OK
      * @see UserService#findAll() UserService.findAll()
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/api/auth/users",
         produces = "application/json")
     public ResponseEntity<?> listAllUsers()
@@ -115,7 +114,7 @@ public class UserController
      * @throws URISyntaxException Exception if something does not work in creating the location header
      * @see UserService#save(User) UserService.save(User)
      */
-    @PostMapping(value = "/api/auth/register",
+    @PostMapping(value = "/api/register",
         consumes = "application/json")
     public ResponseEntity<?> addNewUser(
         @Valid

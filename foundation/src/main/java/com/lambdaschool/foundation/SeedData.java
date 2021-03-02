@@ -82,12 +82,6 @@ public class SeedData
         u1.getRoles()
             .add(new UserRoles(u1,
                 r3));
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@email.local"));
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@mymail.local"));
 
         u1 = userService.save(u1);
 
@@ -100,15 +94,6 @@ public class SeedData
         u2.getRoles()
             .add(new UserRoles(u2,
                 r3));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.local"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.local"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.local"));
         userService.save(u2);
 
         // user
@@ -117,9 +102,6 @@ public class SeedData
         u3.getRoles()
             .add(new UserRoles(u3,
                 r2));
-        u3.getUseremails()
-            .add(new Useremail(u3,
-                "barnbarn@email.local"));
         userService.save(u3);
 
         User u4 = new User("puttat",

@@ -43,16 +43,6 @@ public class User
     private String password;
 
     /**
-     * A list of emails for this user
-     */
-    @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
-    private List<Useremail> useremails = new ArrayList<>();
-
-    /**
      * Part of the join relationship between user and role
      * connects users to the user role combination
      */
@@ -81,19 +71,19 @@ public class User
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
+    @JsonIgnoreProperties(value = {"user", "potluck", "attendee"},
         allowSetters = true)
     private List<Potluck> potlucks = new ArrayList<>();
 
     /**
-     * A list of potluckitems associated with this user
+     * A list of items associated with this user
      */
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = false)
     @JsonIgnoreProperties(value = "user",
         allowSetters = true)
-    private List<PotLuckItem> potluckitems = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -190,26 +180,6 @@ public class User
     }
 
     /**
-     * Getter for the list of useremails for this user
-     *
-     * @return the list of useremails (List(Useremail)) for this user
-     */
-    public List<Useremail> getUseremails()
-    {
-        return useremails;
-    }
-
-    /**
-     * Setter for list of useremails for this user
-     *
-     * @param useremails the new list of useremails (List(Useremail)) for this user
-     */
-    public void setUseremails(List<Useremail> useremails)
-    {
-        this.useremails = useremails;
-    }
-
-    /**
      * Getter for user role combinations
      *
      * @return A list of user role combinations associated with this user
@@ -285,5 +255,23 @@ public class User
      */
     public void setPotlucks(List<Potluck> potlucks) {
         this.potlucks = potlucks;
+    }
+
+    /**
+     * Getter for user's items
+     *
+     * @return A list of items associated with this user
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * Setter for user's items
+     *
+     * @param items Change the list of items associated with this user to this one
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

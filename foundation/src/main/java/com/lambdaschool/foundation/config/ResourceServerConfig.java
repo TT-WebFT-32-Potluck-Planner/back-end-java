@@ -54,7 +54,8 @@ public class ResourceServerConfig
                 "/createnewuser",
                 "/api/potlucks",
                 "/api/potlucks/name/**",
-                "/api/potlucks/potluckid/**")
+                "/api/potlucks/potluckid/**",
+                "/api/register")
             .permitAll()
             .antMatchers(HttpMethod.POST,
                 "/users/**")
