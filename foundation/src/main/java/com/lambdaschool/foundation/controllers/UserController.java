@@ -21,7 +21,6 @@ import java.util.List;
  * The entry point for clients to access user data
  */
 @RestController
-@RequestMapping("/users")
 public class UserController
 {
     /**
@@ -38,7 +37,7 @@ public class UserController
      * @see UserService#findAll() UserService.findAll()
      */
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping(value = "/users",
+    @GetMapping(value = "/api/auth/users",
         produces = "application/json")
     public ResponseEntity<?> listAllUsers()
     {
@@ -55,7 +54,7 @@ public class UserController
      * @return JSON object of the user you seek
      * @see UserService#findUserById(long) UserService.findUserById(long)
      */
-    @GetMapping(value = "/user/{userId}",
+    @GetMapping(value = "/api/auth/userid/{userId}",
         produces = "application/json")
     public ResponseEntity<?> getUserById(
         @PathVariable
@@ -74,7 +73,7 @@ public class UserController
      * @return JSON object of the user you seek
      * @see UserService#findByName(String) UserService.findByName(String)
      */
-    @GetMapping(value = "/user/name/{userName}",
+    @GetMapping(value = "api/auth/user/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserByName(
         @PathVariable
@@ -94,7 +93,7 @@ public class UserController
      * @see UserService#findByNameContaining(String) UserService.findByNameContaining(String)
      */
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping(value = "/user/name/like/{userName}",
+    @GetMapping(value = "api/auth/user/namelike/{userName}",
         produces = "application/json")
     public ResponseEntity<?> getUserLikeName(
         @PathVariable
@@ -116,7 +115,7 @@ public class UserController
      * @throws URISyntaxException Exception if something does not work in creating the location header
      * @see UserService#save(User) UserService.save(User)
      */
-    @PostMapping(value = "/user",
+    @PostMapping(value = "/api/auth/register",
         consumes = "application/json")
     public ResponseEntity<?> addNewUser(
         @Valid
@@ -153,7 +152,7 @@ public class UserController
      * @return status of OK
      * @see UserService#save(User) UserService.save(User)
      */
-    @PutMapping(value = "/user/{userid}",
+    @PutMapping(value = "/api/auth/user/{userid}",
         consumes = "application/json")
     public ResponseEntity<?> updateFullUser(
         @Valid
@@ -179,7 +178,7 @@ public class UserController
      * @return A status of OK
      * @see UserService#update(User, long) UserService.update(User, long)
      */
-    @PatchMapping(value = "/user/{id}",
+    @PatchMapping(value = "/api/auth/user/{id}",
         consumes = "application/json")
     public ResponseEntity<?> updateUser(
         @RequestBody
@@ -199,7 +198,7 @@ public class UserController
      * @param id the primary key of the user you wish to delete
      * @return Status of OK
      */
-    @DeleteMapping(value = "/user/{id}")
+    @DeleteMapping(value = "/api/auth/user/{id}")
     public ResponseEntity<?> deleteUserById(
         @PathVariable
             long id)
@@ -218,7 +217,7 @@ public class UserController
      */
     @ApiOperation(value = "returns the currently authenticated user",
         response = User.class)
-    @GetMapping(value = "/getuserinfo",
+    @GetMapping(value = "/users/getuserinfo",
         produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
     {

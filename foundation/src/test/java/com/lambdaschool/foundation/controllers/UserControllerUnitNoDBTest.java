@@ -75,8 +75,7 @@ public class UserControllerUnitNoDBTest
 
         // admin, data, user
         User u1 = new User("admin",
-            "ILuvM4th!",
-            "admin@lambdaschool.test");
+            "ILuvM4th!");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -107,8 +106,7 @@ public class UserControllerUnitNoDBTest
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
         User u2 = new User("cinnamon",
-            "1234567",
-            "cinnamon@lambdaschool.test");
+            "1234567");
         u1.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -142,8 +140,7 @@ public class UserControllerUnitNoDBTest
 
         // user
         User u3 = new User("testingbarn",
-            "ILuvM4th!",
-            "testingbarn@school.lambda");
+            "ILuvM4th!");
         u3.getRoles()
             .add(new UserRoles(u3,
                 r1));
@@ -159,8 +156,7 @@ public class UserControllerUnitNoDBTest
         userList.add(u3);
 
         User u4 = new User("testingcat",
-            "password",
-            "testingcat@school.lambda");
+            "password");
         u4.getRoles()
             .add(new UserRoles(u4,
                 r2));
@@ -169,8 +165,7 @@ public class UserControllerUnitNoDBTest
         userList.add(u4);
 
         User u5 = new User("testingdog",
-            "password",
-            "testingdog@school.lambda");
+            "password");
         u4.getRoles()
             .add(new UserRoles(u5,
                 r2));

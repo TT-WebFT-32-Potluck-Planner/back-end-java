@@ -59,8 +59,7 @@ public class UserServiceImplNoDBTest
 
         // admin, data, user
         User u1 = new User("admin",
-            "ILuvM4th!",
-            "admin@lambdaschool.test");
+            "ILuvM4th!");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -91,8 +90,7 @@ public class UserServiceImplNoDBTest
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
         User u2 = new User("cinnamon",
-            "1234567",
-            "cinnamon@lambdaschool.test");
+            "1234567");
         u1.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -126,8 +124,7 @@ public class UserServiceImplNoDBTest
 
         // user
         User u3 = new User("testingbarn",
-            "ILuvM4th!",
-            "testingbarn@school.lambda");
+            "ILuvM4th!");
         u3.getRoles()
             .add(new UserRoles(u3,
                 r1));
@@ -143,8 +140,7 @@ public class UserServiceImplNoDBTest
         userList.add(u3);
 
         User u4 = new User("testingcat",
-            "password",
-            "testingcat@school.lambda");
+            "password");
         u4.getRoles()
             .add(new UserRoles(u4,
                 r2));
@@ -153,8 +149,7 @@ public class UserServiceImplNoDBTest
         userList.add(u4);
 
         User u5 = new User("testingdog",
-            "password",
-            "testingdog@school.lambda");
+            "password");
         u4.getRoles()
             .add(new UserRoles(u5,
                 r2));
@@ -268,8 +263,7 @@ public class UserServiceImplNoDBTest
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
-            "ILuvMath!",
-            "tiger@school.lambda");
+            "ILuvMath!");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -295,8 +289,7 @@ public class UserServiceImplNoDBTest
         r2.setRoleid(2);
 
         User u2 = new User("tiger",
-            "ILuvMath!",
-            "tiger@school.lambda");
+            "ILuvMath!");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -326,8 +319,7 @@ public class UserServiceImplNoDBTest
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
-            "password",
-            "cinnamon@school.lambda");
+            "password");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -369,8 +361,7 @@ public class UserServiceImplNoDBTest
         r2.setRoleid(2);
 
         User u2 = new User("cinnamon",
-            "password",
-            "cinnamon@school.lambda");
+            "password");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));

@@ -51,7 +51,10 @@ public class ResourceServerConfig
                 "/swagger-ui.html",
                 "/v2/api-docs",
                 "/webjars/**",
-                "/createnewuser")
+                "/createnewuser",
+                "/api/potlucks",
+                "/api/potlucks/name/**",
+                "/api/potlucks/potluckid/**")
             .permitAll()
             .antMatchers(HttpMethod.POST,
                 "/users/**")
@@ -65,7 +68,15 @@ public class ResourceServerConfig
             .antMatchers("/users/**",
                 "/useremails/**",
                 "/oauth/revoke-token",
-                "/logout")
+                "/logout",
+                "/api/auth/**",
+                "/api/users/**")
+            .authenticated()
+            .antMatchers(HttpMethod.POST,
+                "/potlucks")
+            .authenticated()
+            .antMatchers(HttpMethod.PUT,
+                "/api/users/{id}/potlucks/**")
             .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")

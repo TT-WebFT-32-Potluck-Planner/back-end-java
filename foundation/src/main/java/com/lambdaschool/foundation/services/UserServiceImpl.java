@@ -1,12 +1,10 @@
 package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.foundation.models.Role;
-import com.lambdaschool.foundation.models.User;
-import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
+import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.oauth2.client.resource.OAuth2AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -101,8 +99,6 @@ public class UserServiceImpl
         newUser.setUsername(user.getUsername()
             .toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
-        newUser.setPrimaryemail(user.getPrimaryemail()
-            .toLowerCase());
 
         newUser.getRoles()
             .clear();
@@ -146,12 +142,6 @@ public class UserServiceImpl
             if (user.getPassword() != null)
             {
                 currentUser.setPasswordNoEncrypt(user.getPassword());
-            }
-
-            if (user.getPrimaryemail() != null)
-            {
-                currentUser.setPrimaryemail(user.getPrimaryemail()
-                    .toLowerCase());
             }
 
             if (user.getRoles()
