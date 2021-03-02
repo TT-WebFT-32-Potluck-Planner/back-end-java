@@ -5,7 +5,6 @@ import com.lambdaschool.foundation.FoundationApplicationTesting;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.services.UserService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -86,20 +85,6 @@ public class UserControllerUnitNoDBTest
             .add(new UserRoles(u1,
                 r3));
 
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@email.test"));
-        u1.getUseremails()
-            .get(0)
-            .setUseremailid(10);
-
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@mymail.test"));
-        u1.getUseremails()
-            .get(1)
-            .setUseremailid(11);
-
         u1.setUserid(101);
         userList.add(u1);
 
@@ -114,26 +99,6 @@ public class UserControllerUnitNoDBTest
             .add(new UserRoles(u2,
                 r3));
 
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.test"));
-        u2.getUseremails()
-            .get(0)
-            .setUseremailid(20);
-
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.test"));
-        u2.getUseremails()
-            .get(1)
-            .setUseremailid(21);
-
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.test"));
-        u2.getUseremails()
-            .get(2)
-            .setUseremailid(22);
 
         u2.setUserid(102);
         userList.add(u2);
@@ -145,12 +110,6 @@ public class UserControllerUnitNoDBTest
             .add(new UserRoles(u3,
                 r1));
 
-        u3.getUseremails()
-            .add(new Useremail(u3,
-                "barnbarn@email.test"));
-        u3.getUseremails()
-            .get(0)
-            .setUseremailid(30);
 
         u3.setUserid(103);
         userList.add(u3);

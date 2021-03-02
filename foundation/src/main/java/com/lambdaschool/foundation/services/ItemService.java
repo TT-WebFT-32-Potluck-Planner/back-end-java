@@ -10,5 +10,5 @@ public interface ItemService {
 
   Item findItemById(long id);
 
-  Item save(Item item);
+  Item save(Item item, long userid, long potluckid);
 }

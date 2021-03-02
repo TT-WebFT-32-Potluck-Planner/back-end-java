@@ -5,7 +5,6 @@ import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -121,9 +120,6 @@ public class UserServiceImplWithDBTest
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "tiger@tiger.local"));
 
         User saveU2 = userService.save(u2);
 
@@ -131,10 +127,6 @@ public class UserServiceImplWithDBTest
         System.out.println(saveU2);
         System.out.println("*** DATA ***");
 
-        assertEquals("tiger@tiger.local",
-            saveU2.getUseremails()
-                .get(0)
-                .getUseremail());
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -148,9 +140,6 @@ public class UserServiceImplWithDBTest
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "tiger@tiger.local"));
         u2.setUserid(777);
 
         User saveU2 = userService.save(u2);
@@ -159,10 +148,6 @@ public class UserServiceImplWithDBTest
         System.out.println(saveU2);
         System.out.println("*** DATA ***");
 
-        assertEquals("tiger@tiger.local",
-            saveU2.getUseremails()
-                .get(0)
-                .getUseremail());
     }
 
     @Test
@@ -176,9 +161,6 @@ public class UserServiceImplWithDBTest
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "mojo@corgi.local"));
         u2.setUserid(4);
 
         User saveU2 = userService.save(u2);
@@ -187,10 +169,6 @@ public class UserServiceImplWithDBTest
         System.out.println(saveU2);
         System.out.println("*** DATA ***");
 
-        assertEquals("mojo@corgi.local",
-            saveU2.getUseremails()
-                .get(0)
-                .getUseremail());
     }
 
     @Test
@@ -208,15 +186,6 @@ public class UserServiceImplWithDBTest
             .add(new UserRoles(u2,
                 r2));
 
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.thump"));
 
         User updatedu2 = userService.update(u2,
             7);
@@ -225,12 +194,6 @@ public class UserServiceImplWithDBTest
         System.out.println(updatedu2);
         System.out.println("*** DATA ***");
 
-        int checking = updatedu2.getUseremails()
-            .size() - 1;
-        assertEquals("bunny@email.thump",
-            updatedu2.getUseremails()
-                .get(checking)
-                .getUseremail());
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -244,15 +207,6 @@ public class UserServiceImplWithDBTest
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.thump"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.thump"));
 
         Mockito.when(helperFunctions.isAuthorizedToMakeChange(anyString()))
             .thenReturn(false);
@@ -264,11 +218,5 @@ public class UserServiceImplWithDBTest
         System.out.println(updatedu2);
         System.out.println("*** DATA ***");
 
-        int checking = updatedu2.getUseremails()
-            .size() - 1;
-        assertEquals("bunny@email.thump",
-            updatedu2.getUseremails()
-                .get(checking)
-                .getUseremail());
     }
 }

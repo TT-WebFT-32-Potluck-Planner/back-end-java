@@ -67,13 +67,13 @@ public class Potluck extends Auditable {
   @ManyToOne
   @JoinColumn(name = "userid",
       nullable = false)
-  @JsonIgnoreProperties(value="potlucks",
+  @JsonIgnoreProperties(value="potluck",
       allowSetters = true)
   private User user;
 
   /**
-   * Part of the join relationship between potluck and potluckitems
-   * connects potlucks to potluckitems
+   * Part of the join relationship between potluck and items
+   * connects potlucks to items
    */
   @OneToMany(mappedBy = "potluck",
       cascade = CascadeType.ALL,

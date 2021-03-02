@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item extends Auditable {
 
   /**
    * The primary key (long) of the items table
@@ -30,7 +30,7 @@ public class Item {
    */
   @ManyToOne
   @JoinColumn(name="potluckid", nullable = false)
-  @JsonIgnoreProperties(value="potluckitems")
+  @JsonIgnoreProperties(value="items", allowSetters = true)
   private Potluck potluck;
 
   /**
@@ -43,7 +43,7 @@ public class Item {
   @ManyToOne
   @JoinColumn(name = "userid",
       nullable = true)
-  @JsonIgnoreProperties(value="potluckitems",
+  @JsonIgnoreProperties(value="items",
       allowSetters = true)
   private User user;
 

@@ -6,7 +6,6 @@ import com.github.javafaker.service.RandomService;
 import com.lambdaschool.foundation.models.Role;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.models.UserRoles;
-import com.lambdaschool.foundation.models.Useremail;
 import com.lambdaschool.foundation.services.RoleService;
 import com.lambdaschool.foundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +70,7 @@ public class SeedData
 
         // admin, data, user
         User u1 = new User("admin",
-            "password",
-            "admin@lambdaschool.test");
+            "password");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -82,59 +80,36 @@ public class SeedData
         u1.getRoles()
             .add(new UserRoles(u1,
                 r3));
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@email.test"));
-        u1.getUseremails()
-            .add(new Useremail(u1,
-                "admin@mymail.test"));
 
         userService.save(u1);
 
         // data, user
         User u2 = new User("cinnamon",
-            "1234567",
-            "cinnamon@lambdaschool.test");
+            "1234567");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
         u2.getRoles()
             .add(new UserRoles(u2,
                 r3));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "cinnamon@mymail.test"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "hops@mymail.test"));
-        u2.getUseremails()
-            .add(new Useremail(u2,
-                "bunny@email.test"));
-        userService.save(u2);
 
         // user
         User u3 = new User("barnbarn",
-            "ILuvM4th!",
-            "barnbarn@lambdaschool.test");
+            "ILuvM4th!");
         u3.getRoles()
             .add(new UserRoles(u3,
                 r2));
-        u3.getUseremails()
-            .add(new Useremail(u3,
-                "barnbarn@email.test"));
         userService.save(u3);
 
         User u4 = new User("puttat",
-            "password",
-            "puttat@school.lambda");
+            "password");
         u4.getRoles()
             .add(new UserRoles(u4,
                 r2));
         userService.save(u4);
 
         User u5 = new User("misskitty",
-            "password",
-            "misskitty@school.lambda");
+            "password");
         u5.getRoles()
             .add(new UserRoles(u5,
                 r2));
@@ -157,15 +132,10 @@ public class SeedData
 
                 fakeUser = new User(nameFaker.name()
                     .username(),
-                    "password",
-                    nameFaker.internet()
-                        .emailAddress());
+                    "password");
                 fakeUser.getRoles()
                     .add(new UserRoles(fakeUser,
                         r2));
-                fakeUser.getUseremails()
-                    .add(new Useremail(fakeUser,
-                        fakeValuesService.bothify("????##@gmail.com")));
                 userService.save(fakeUser);
             }
         }
