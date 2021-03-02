@@ -60,8 +60,8 @@ public class PotluckServiceImpl implements PotluckService{
       newPotluck.setPotluckid(potluck.getPotluckid());
     }
 
-    //check if name already exists
-//    potluck.getPotluckname()
+    if (potluckRepository.findPotluckByPotluckname(potluck.getPotluckname()) != null)
+      throw new ResourceNotFoundException("Potluck name " + potluck.getPotluckname() + " already exists.");
 
     newPotluck.setPotluckname(potluck.getPotluckname());
     newPotluck.setDate(potluck.getDate());
@@ -82,14 +82,14 @@ public class PotluckServiceImpl implements PotluckService{
           .add(new Attendee(addUser, newPotluck));
     }
 
-    newPotluck.getPotLuckitems()
+    newPotluck.getItems()
         .clear();
 
-    for (PotLuckItem potLuckItem : potluck.getPotLuckitems())
+    for (Item item : potluck.getItems())
     {
-      Item addItem = itemService.findItemById(potLuckItem.getItem().getItemid());
-      newPotluck.getPotLuckitems()
-          .add(new PotLuckItem(newPotluck, addItem));
+      Item addItem = itemService.findItemById(item.getItemid());
+      newPotluck.getItems()
+          .add(addItem);
     }
 
     return potluckRepository.save(newPotluck);

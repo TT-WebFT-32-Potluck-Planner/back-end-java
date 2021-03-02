@@ -93,7 +93,7 @@ public class User
         orphanRemoval = false)
     @JsonIgnoreProperties(value = "user",
         allowSetters = true)
-    private List<PotLuckItem> potluckitems = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -285,5 +285,23 @@ public class User
      */
     public void setPotlucks(List<Potluck> potlucks) {
         this.potlucks = potlucks;
+    }
+
+    /**
+     * Getter for user's items
+     *
+     * @return A list of items associated with this user
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * Setter for user's items
+     *
+     * @param items Change the list of items associated with this user to this one
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

@@ -80,7 +80,7 @@ public class Potluck extends Auditable {
       orphanRemoval = true)
   @JsonIgnoreProperties(value = "potluck",
       allowSetters = true)
-  private Set<PotLuckItem> potLuckitems = new HashSet<>();
+  private Set<Item> items = new HashSet<>();
 
   /**
    * Default constructor used primarily by the JPA.
@@ -161,13 +161,11 @@ public class Potluck extends Auditable {
     this.user = user;
   }
 
-  public Set<PotLuckItem> getPotLuckitems() {
-    return potLuckitems;
+  public Set<Item> getItems() {
+    return items;
   }
 
-  public void setPotLuckitems(Set<PotLuckItem> potLuckitems) {
-    this.potLuckitems = potLuckitems;
+  public void setItems(Set<Item> items) {
+    this.items = items;
   }
-
-
 }

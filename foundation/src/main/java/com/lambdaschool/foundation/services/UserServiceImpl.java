@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.exceptions.ResourceFoundException;
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.repository.UserRepository;
@@ -94,6 +95,10 @@ public class UserServiceImpl
             userrepos.findById(user.getUserid())
                 .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
             newUser.setUserid(user.getUserid());
+        }
+
+        if (userrepos.findByUsername(user.getUsername()) != null) {
+            throw new ResourceFoundException("User " + user.getUsername() + "already exists.");
         }
 
         newUser.setUsername(user.getUsername()

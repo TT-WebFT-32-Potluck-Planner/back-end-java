@@ -2,7 +2,6 @@ package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Item;
-import com.lambdaschool.foundation.models.PotLuckItem;
 import com.lambdaschool.foundation.models.Potluck;
 import com.lambdaschool.foundation.repository.ItemRepository;
 import com.lambdaschool.foundation.repository.PotluckRepository;
@@ -49,17 +48,9 @@ public class ItemServiceImpl implements ItemService{
 
     newItem.setItemname(item.getItemname());
 
-    newItem.getPotLuckitems()
-        .clear();
-    for (PotLuckItem pli : item.getPotLuckitems())
-    {
-      Potluck newPotluck = potluckRepository.findById(pli.getPotluck().getPotluckid())
-          .orElseThrow(() -> new ResourceNotFoundException("Potluck id " + pli.getPotluck()
-              .getPotluckid() + " not found!"));
+    newItem.setPotluck(item.getPotluck());
 
-      newItem.getPotLuckitems()
-          .add(new PotLuckItem(newPotluck, newItem));
-    }
+    newItem.setUser(item.getUser());
 
     return itemRepository.save(newItem);
   }
