@@ -1,6 +1,9 @@
 package com.lambdaschool.foundation.controllers;
 
+import com.lambdaschool.foundation.models.Attendee;
+import com.lambdaschool.foundation.models.Potluck;
 import com.lambdaschool.foundation.models.User;
+import com.lambdaschool.foundation.services.PotluckService;
 import com.lambdaschool.foundation.services.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +32,9 @@ public class UserController
      */
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PotluckService potluckService;
 
     /**
      * Returns a list of all users
@@ -223,5 +230,20 @@ public class UserController
         User u = userService.findByName(authentication.getName());
         return new ResponseEntity<>(u,
             HttpStatus.OK);
+    }
+
+    //RSVP USER FOR POTLUCK
+    @PostMapping(value = "/api/users/{userid}/potlucks/{potluckid}")
+    public ResponseEntity<?> RSVPUser(
+        @PathVariable Long potluckid
+    ) {
+
+        User user = userService.findByName(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        potluckService.RSVPForPotluck(user, potluckid);
+
+        return new ResponseEntity<>("User rsvp'd to potluck!", HttpStatus.OK);
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,7 +48,7 @@ public class User
     @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
+    @JsonIgnoreProperties(value = {"user", "potlucks", "attendees"},
         allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
@@ -58,12 +57,12 @@ public class User
      * Part of the join relationship between user and potluck
      * connects users to the potlucks they are attending
      */
-    @OneToMany(mappedBy = "user",
+    @OneToMany(mappedBy = "attendee",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
+    @JsonIgnoreProperties(value = {"user", "potlucks", "attendee", "items"},
         allowSetters = true)
-    private Set<Attendee> attendees = new HashSet<>();
+    private Set<Attendee> potlucksattending = new HashSet<>();
 
     /**
      * A list of potlucks this user is hosting
@@ -226,8 +225,8 @@ public class User
      *
      * @return A list of user attendee objects associated with this user
      */
-    public Set<Attendee> getAttendees() {
-        return attendees;
+    public Set<Attendee> getPotlucksattending() {
+        return potlucksattending;
     }
 
     /**
@@ -235,8 +234,8 @@ public class User
      *
      * @param attendees Change the list of user attendee objects associated with this user to this one
      */
-    public void setAttendees(Set<Attendee> attendees) {
-        this.attendees = attendees;
+    public void setPotlucksattending(Set<Attendee> attendees) {
+        this.potlucksattending = attendees;
     }
 
     /**
