@@ -82,6 +82,8 @@ public class ResourceServerConfig
             .antMatchers(HttpMethod.PUT,
                 "/api/users/{id}/potlucks/**")
             .authenticated()
+            .antMatchers(HttpMethod.PATCH, "/api/potlucks/{potluckid}/items/{itemid}")
+            .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")
             .anyRequest()

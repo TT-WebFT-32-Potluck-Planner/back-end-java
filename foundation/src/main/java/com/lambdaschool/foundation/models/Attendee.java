@@ -26,7 +26,7 @@ public class Attendee extends Auditable implements Serializable {
   @Id
   @ManyToOne
   @JoinColumn(name = "userid")
-  @JsonIgnoreProperties(value={"potlucks","potluck","items","attendees", "user", "roles"},
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","attendees", "user", "roles", "potlucksattending"},
     allowSetters = true)
   private User attendee;
 
@@ -41,7 +41,7 @@ public class Attendee extends Auditable implements Serializable {
   @Id
   @ManyToOne
   @JoinColumn(name = "potluckid")
-  @JsonIgnoreProperties(value="attendees",
+  @JsonIgnoreProperties(value= {"attendees", "attending", "items"},
       allowSetters = true)
   private Potluck potluck;
 

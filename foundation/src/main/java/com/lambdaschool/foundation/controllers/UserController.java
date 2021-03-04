@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The entry point for clients to access user data
@@ -245,5 +246,16 @@ public class UserController
         potluckService.RSVPForPotluck(user, potluckid);
 
         return new ResponseEntity<>("User rsvp'd to potluck!", HttpStatus.OK);
+    }
+
+    //show ALL POTLUCKS USER IS ATTENDING
+    @GetMapping(value = "/api/users/{id}/potlucks/attending", produces = "application/json")
+    public ResponseEntity<?> getPotlucksByUser() {
+        User user = userService.findByName(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+        Set<Attendee> potlucks = user.getPotlucksattending();
+
+        return new ResponseEntity<>(potlucks, HttpStatus.OK);
     }
 }
