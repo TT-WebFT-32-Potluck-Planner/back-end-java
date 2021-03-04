@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.repository;
 
+import com.lambdaschool.foundation.models.Potluck;
 import com.lambdaschool.foundation.models.User;
 import org.springframework.data.repository.CrudRepository;
 
@@ -26,4 +27,5 @@ public interface UserRepository
      * @return List of users whose name contain the given substring ignoring case
      */
     List<User> findByUsernameContainingIgnoreCase(String name);
+
 }

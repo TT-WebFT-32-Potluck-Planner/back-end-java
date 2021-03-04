@@ -4,7 +4,6 @@ import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.*;
 import com.lambdaschool.foundation.repository.PotluckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,7 +64,7 @@ public class PotluckServiceImpl implements PotluckService{
 
           for (Attendee attendee : potluck.getAttendees())
           {
-            User addUser = userService.findUserById(attendee.getUser().getUserid());
+            User addUser = userService.findUserById(attendee.getAttendee().getUserid());
             currentPotluck.getAttendees()
                 .add(new Attendee(addUser, currentPotluck));
           }
@@ -113,7 +112,7 @@ public class PotluckServiceImpl implements PotluckService{
 
     for (Attendee attendee : potluck.getAttendees())
     {
-      User addUser = userService.findUserById(attendee.getUser().getUserid());
+      User addUser = userService.findUserById(attendee.getAttendee().getUserid());
       newPotluck.getAttendees()
           .add(new Attendee(addUser, newPotluck));
     }
@@ -144,5 +143,16 @@ public class PotluckServiceImpl implements PotluckService{
     potluckRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Potluck id " + id + " not found!"));
     potluckRepository.deleteById(id);
+  }
+
+  @Override
+  public void RSVPForPotluck(User user, long potluckid) {
+    Potluck potluck = potluckRepository.findById(potluckid)
+        .orElseThrow(() -> new ResourceNotFoundException("Potluck id " + potluckid + " not found!"));
+
+        potluck.getAttendees().add(new Attendee(user, potluck));
+//        user.getAttendees().add(newAttendee);
+
+//        update(potluck, potluckid);
   }
 }

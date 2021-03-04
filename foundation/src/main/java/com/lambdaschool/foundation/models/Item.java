@@ -43,7 +43,7 @@ public class Item extends Auditable {
   @ManyToOne
   @JoinColumn(name = "userid",
       nullable = true)
-  @JsonIgnoreProperties(value="items",
+  @JsonIgnoreProperties(value= {"potlucksattending"},
       allowSetters = true)
   private User user;
 

@@ -1,6 +1,7 @@
 package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
+import com.lambdaschool.foundation.models.Attendee;
 import com.lambdaschool.foundation.models.Item;
 import com.lambdaschool.foundation.models.Potluck;
 import com.lambdaschool.foundation.models.User;
@@ -56,10 +57,11 @@ public class ItemServiceImpl implements ItemService{
 
     newItem.setPotluck(potluckService.findPotluckById(potluckid));
 
-    newItem.setUser(userService.findUserById(userid));
+    newItem.setUser(item.getUser());
 
     return itemRepository.save(newItem);
   }
+
 
   @Override
   public List<Item> findItemsByPotluckId(Long potluckid) {
@@ -76,5 +78,15 @@ public class ItemServiceImpl implements ItemService{
     itemRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Item id " + id + " not found!"));
     itemRepository.deleteById(id);
+  }
+
+  @Transactional
+  @Override
+  public Item addUserToItem(long userid, long potluckid, long itemid) {
+
+    Item newItem = findItemById(itemid);
+    newItem.setUser(userService.findUserById(userid));
+
+    return itemRepository.save(newItem);
   }
 }

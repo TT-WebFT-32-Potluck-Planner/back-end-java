@@ -1,6 +1,7 @@
 package com.lambdaschool.foundation.controllers;
 
 import com.lambdaschool.foundation.exceptions.ResourceFoundException;
+import com.lambdaschool.foundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.foundation.models.Item;
 import com.lambdaschool.foundation.models.User;
 import com.lambdaschool.foundation.services.ItemService;
@@ -47,7 +48,7 @@ public class ItemController {
     return new ResponseEntity<>(newitem, HttpStatus.CREATED);
   }
 
-
+  //
   @PreAuthorize("isAuthenticated()")
   @PutMapping(value = "/api/users/{userid}/potlucks/{potluckid}/items/{itemid}", consumes = "application/json", produces = "application/json")
   public ResponseEntity<?> updateItem(
@@ -102,6 +103,25 @@ public class ItemController {
           return new ResponseEntity<>("Item can only be deleted by potluck creator.", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  //USER CAN ADD THEMSELVES TO AN ITEM
+  @PatchMapping(value = "/api/potlucks/{potluckid}/items/{itemid}")
+  public ResponseEntity<?> updateItemUser(
+    @PathVariable long potluckid,
+    @PathVariable long itemid
+  ) {
+
+    User user = userService.findByName(
+        SecurityContextHolder.getContext().getAuthentication().getName()
+    );
+    System.out.println("CONTROLLER" + user.getUserid());
+    System.out.println("CONTROLLER" + user.getUsername());
+    System.out.println("CONTROLLER" + potluckid);
+    System.out.println("CONTROLLER" + itemid);
+    itemService.addUserToItem(user.getUserid(), potluckid, itemid);
+
+    return new ResponseEntity<>("User " + user.getUserid() + " signed up to bring item " + itemid + "!", HttpStatus.OK);
   }
 
 }

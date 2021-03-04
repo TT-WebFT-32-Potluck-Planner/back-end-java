@@ -1,6 +1,7 @@
 package com.lambdaschool.foundation.services;
 
 import com.lambdaschool.foundation.models.Potluck;
+import com.lambdaschool.foundation.models.User;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface PotluckService {
   Potluck findPotluckByName(String name);
 
   void deletePotluckById(long id);
+
+  void RSVPForPotluck(User user, long potluckid);
 }

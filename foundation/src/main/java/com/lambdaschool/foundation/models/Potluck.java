@@ -55,7 +55,7 @@ public class Potluck extends Auditable {
   @OneToMany(mappedBy = "potluck",
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","attendees", "roles"},
       allowSetters = true)
   private Set<Attendee> attendees = new HashSet<>();
 
@@ -69,7 +69,7 @@ public class Potluck extends Auditable {
   @ManyToOne
   @JoinColumn(name = "userid",
       nullable = false)
-  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","attendees", "user", "roles"},
       allowSetters = true)
   private User user;
 
@@ -80,7 +80,7 @@ public class Potluck extends Auditable {
   @OneToMany(mappedBy = "potluck",
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  @JsonIgnoreProperties(value={"potlucks","potluck","items","Attendees", "user", "roles"},
+  @JsonIgnoreProperties(value={"potlucks","potluck","items","attendees", "user", "roles"},
       allowSetters = true)
   private List<Item> items = new ArrayList<>();
 

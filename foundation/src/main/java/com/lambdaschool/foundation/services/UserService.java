@@ -1,5 +1,6 @@
 package com.lambdaschool.foundation.services;
 
+import com.lambdaschool.foundation.models.Potluck;
 import com.lambdaschool.foundation.models.User;
 
 import java.util.List;
@@ -79,4 +80,5 @@ public interface UserService
      * Deletes all record and their associated records from the database
      */
     public void deleteAll();
+
 }
